@@ -1,15 +1,18 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Typography, Button } from "@mui/material";
 import { useRouter } from 'next/navigation';
 
 const HomePage = () => {
   const route = useRouter()
-  if (localStorage.getItem('password')) {
-    route.push('/')
-  } else {
-    route.push('/signin')
-  }
+  useEffect(() => {
+    if (localStorage.getItem('password')) {
+      route.push('/')
+    } else {
+      route.push('/signin')
+    }
+  }, [])
+
   const logOut = () => {
     localStorage.removeItem('password');
     route.push('signin')
